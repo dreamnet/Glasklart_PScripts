@@ -1,2 +1,2 @@
-# Glasklart_PScripts
-Simple Photoshop scripts for help generating Glasklart icons.
+# Glasklart PScripts
+Simple Photoshop scripts for automatic generating Glasklart icons.
