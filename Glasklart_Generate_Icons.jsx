@@ -9,7 +9,7 @@ app.bringToFront();
 
 // Please set the vars below to your needs! -----------------------------------------------------------------------
 var templateFolder = 'D:/Users/Kirchi/Desktop/Glasklart PScripts'; // the folder containing the 'template' folder
-var outputFolder = 'D:/Users/Kirchi/Desktop'; // The output folder where the finished icons will be saved.
+var outputFolder = 'D/Users/Kirchi/Desktop'; // The output folder where the finished icons will be saved.
 // end editable vars ----------------------------------------------------------------------------------------------
 
 // no changes should be done below this line unless You know what you are doing! ----------------------------------
