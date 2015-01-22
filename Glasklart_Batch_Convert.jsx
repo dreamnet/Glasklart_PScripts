@@ -15,7 +15,7 @@
 //          -> 03_Glasklart_Icon_Template_@3x.psd
 //
 // take care that this script deletes the input files after converting them to Glasklart icons without any prompting !!!
-// if you don't want his, simply comment out line #82 (// sourceFile.remove();) <----------------------------------- !!!
+// if you don't want his, simply comment out line #74 (// sourceFile.remove();) <----------------------------------- !!!
 //
 // written by @dreamnet 12-22-14
 
