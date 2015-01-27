@@ -19,7 +19,7 @@ var sourceFile = File.openDialog ("Please select the 1024x1024px Glasklart PNG s
 
 // set paths to template files
 var templateFile1 = File(templateFolder+'/templates/01_Glasklart_Icon_Template_@2x.psd');
-var templateFile2 = File(templateFolder+'/templates/02_Galsklart_Icon_Template_~iPad@2x.psd');
+var templateFile2 = File(templateFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x.psd');
 var templateFile3 = File(templateFolder+'/templates/03_Glasklart_Icon_Template_@3x.psd');
 
 generateGlasklartIcon(78,21,sourceFile,templateFile1,outputFolder,"@2x"); // generates 120px Glasklart icon (@2x)            |
