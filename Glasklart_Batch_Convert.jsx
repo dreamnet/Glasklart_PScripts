@@ -44,8 +44,8 @@ for(var i=0; i<fileList.length; i++) { // loop trough input files
     var docName = sourceFile.name;
     docName = docName.replace(/(?:\.[^.]*$|$)/, '');
 
-    generateGlasklartIcon(78, 21, sourceFile, templateFile1, outputFolder+"/@2x", docName+"@2x");           // generates 120px Glasklart icon (@2x)      | comment out
-    generateGlasklartIcon(100, 26, sourceFile, templateFile2, outputFolder+"/iPad@2x", docName+"~iPad@2x"); // generates 152px Glasklart icon (~ipad@2x) | what you
+    // generateGlasklartIcon(78, 21, sourceFile, templateFile1, outputFolder+"/@2x", docName+"@2x");           // generates 120px Glasklart icon (@2x)      | comment out
+    generateGlasklartIcon(100, 26, sourceFile, templateFile2, outputFolder+"/iPad", docName+"~ipad@2x"); // generates 152px Glasklart icon (~ipad@2x) | what you
     generateGlasklartIcon(120, 30, sourceFile, templateFile3, outputFolder+"/@3x", docName+"@3x");          // generates 180px Glasklart icon (@3x)      | don't need
     
     sourceFile.remove(); // delete source file from disk
