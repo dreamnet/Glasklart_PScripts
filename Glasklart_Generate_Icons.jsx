@@ -2,7 +2,7 @@
 
 // The script needs the Glasklart Icon Templates (seed vars below) and a 1024x1024px source .png file.
 //
-// written by @dreamnet 12-30-14
+// written by @dreamnet 12-30-14 - updated on 02-22-15
 
 #target photoshop
 app.bringToFront();
@@ -22,9 +22,9 @@ var templateFile1 = File(templateFolder+'/templates/01_Glasklart_Icon_Template_@
 var templateFile2 = File(templateFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x.psd');
 var templateFile3 = File(templateFolder+'/templates/03_Glasklart_Icon_Template_@3x.psd');
 
-generateGlasklartIcon(78,21,sourceFile,templateFile1,outputFolder,"@2x"); // generates 120px Glasklart icon (@2x)            |
-generateGlasklartIcon(100,26,sourceFile,templateFile2,outputFolder,"~iPad@2x"); // generates 152px Glasklart icon (~ipad@2x) | comment out what you don't need
-generateGlasklartIcon(120,30,sourceFile,templateFile3,outputFolder,"@3x"); // generates 180px Glasklart icon (@3x)           |
+generateGlasklartIcon(78,21,sourceFile,templateFile1,outputFolder,"@2x"); // generates 120px Glasklart icon (@2x)            | comment out
+generateGlasklartIcon(100,26,sourceFile,templateFile2,outputFolder,"~iPad@2x"); // generates 152px Glasklart icon (~ipad@2x) | what you
+generateGlasklartIcon(120,30,sourceFile,templateFile3,outputFolder,"@3x"); // generates 180px Glasklart icon (@3x)           | don't need
 
 // functions ------------------------------------------------------------------------------------------------------
 function generateGlasklartIcon(size,offSet,sourceFile,templateFile,outputFolder,fileName) {
