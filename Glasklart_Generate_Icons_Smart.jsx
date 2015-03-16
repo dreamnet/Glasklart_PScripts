@@ -19,57 +19,36 @@ var sourceFile = File.openDialog ("Please select the 1024x1024px Glasklart PNG s
 
 // set paths to template files
 var templateFile1 = File(templateFolder+'/templates/01_Glasklart_Icon_Template_@2x_Smart.psd');
-// var templateFile2 = File(templateFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x_Smart.psd');
-// var templateFile3 = File(templateFolder+'/templates/03_Glasklart_Icon_Template_@3x_Smart.psd');
+var templateFile2 = File(templateFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x_Smart.psd');
+var templateFile3 = File(templateFolder+'/templates/03_Glasklart_Icon_Template_@3x_Smart.psd');
 
 generateGlasklartIconSmart(templateFile1,sourceFile,outputFolder,"@2x"); // generates 120px Glasklart icon (@2x)            | comment out
-// generateGlasklartIcon(100,26,sourceFile,templateFile2,outputFolder,"~iPad@2x"); // generates 152px Glasklart icon (~ipad@2x) | what you
-// generateGlasklartIcon(120,30,sourceFile,templateFile3,outputFolder,"@3x"); // generates 180px Glasklart icon (@3x)           | don't need
+generateGlasklartIconSmart(templateFile2,sourceFile,outputFolder,"~iPad@2x"); // generates 152px Glasklart icon (~ipad@2x) | what you
+generateGlasklartIconSmart(templateFile3,sourceFile,outputFolder,"@3x"); // generates 180px Glasklart icon (@3x)           | don't need
 
 // functions ------------------------------------------------------------------------------------------------------
 
 function generateGlasklartIconSmart(templateFile,sourceFile,outputFolder,fileName) {
-    var templateDoc = open(templateFile, asSmartObject); // open template
-    template = app.activeDocument; // reference template
-
-}
-
-function generateGlasklartIcon(size,offSet,sourceFile,templateFile,outputFolder,fileName) {
     var templateDoc = open(templateFile); // open template
     template = app.activeDocument; // reference template
-    if(sourceFile != null) { var sourceDoc = open(sourceFile); } // open source file
-    source = app.activeDocument; // reference source
-    source.resizeImage(size,size,null,ResampleMethod.BICUBIC); // resize source file to given size
-    source.selection.selectAll(); // select whole source document
-    source.artLayers[0].duplicate(template, ElementPlacement.PLACEATBEGINNING); // duplicate layer to template
-    source.close(SaveOptions.DONOTSAVECHANGES); // closing source file, not needed anymore
-    app.activeDocument = template; // switch to template file
+    app.activeDocument = template; // make sure template is in front
     var layer = template.activeLayer; // reference layer
-    template.selection.select([[0,0],[0,size],[size,size],[size,0]]); // selecting the whole layer
-    template.selection.translate(offSet,offSet); // moving selection (cant move layer, bacause Photoshop don't sees transparent pixels)
-    template.selection.deselect(); // remove selection
-    layerGroup = template.layerSets.getByName("Sample Icons");
-    layerCopy = layerGroup.layers.getByName("com.atebits.Tweetie2");
-    transferEffects(layerCopy, layer); // copy Glasklart style from sample icon to inserted layer
+    replaceSO(sourceFile);
     saveFile(outputFolder, fileName); // save file to above set output folder
     templateDoc.close(SaveOptions.DONOTSAVECHANGES); // closing template
 }
 
-// function to copy layer effects of one layer and apply them to another one
-function transferEffects (layer1, layer2) {
-    app.activeDocument.activeLayer = layer1;
-    try {
-        var id157 = charIDToTypeID( "CpFX" );
-        executeAction( id157, undefined, DialogModes.ALL );
-        app.activeDocument.activeLayer.visible = !app.activeDocument.activeLayer.visible;
-        app.activeDocument.activeLayer = layer2;
-        var id158 = charIDToTypeID( "PaFX" );
-        executeAction( id158, undefined, DialogModes.ALL );
-    } catch (e) {
-        alert ("The layer has no effects! Check template file!");
-        app.activeDocument.activeLayer = layer2;
-    }
-};
+// function to replace content of a smart object
+function replaceSO(newFile) {
+    var id = stringIDToTypeID( "placedLayerReplaceContents" );
+    var desc = new ActionDescriptor();
+    var idn = charIDToTypeID("null");
+    desc.putPath( idn, new File(newFile));
+    var idp = charIDToTypeID("PgNm");
+    desc.putInteger(idp, 1);
+    executeAction(id, desc, DialogModes.NO);
+    return app.activeDocument.activeLayer;
+}
 
 // function for saving finished Glasklart icon to given ouput folder
 function saveFile(outputFolder, fileName) {
