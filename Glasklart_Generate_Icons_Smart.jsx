@@ -15,21 +15,18 @@ var outputFolder = 'D/Users/Kirchi/Desktop'; // The output folder where the fini
 // end editable vars ----------------------------------------------------------------------------------------------
 
 // no changes should be done below this line unless You know what you are doing! ----------------------------------
-
 // Show dialog for the 1024x1024px png source file
 var sourceFile = File.openDialog ("Please select the 1024x1024px Glasklart PNG source file", "*.png", false)
-
 // set paths to template files
 var templateFile1 = File(templateFolder+'/templates/01_Glasklart_Icon_Template_@2x_Smart.psd');
 var templateFile2 = File(templateFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x_Smart.psd');
 var templateFile3 = File(templateFolder+'/templates/03_Glasklart_Icon_Template_@3x_Smart.psd');
-
+// generating the icons
 generateGlasklartIconSmart(templateFile1,sourceFile,outputFolder,"@2x"); // generates 120px Glasklart icon (@2x)           | comment out
 generateGlasklartIconSmart(templateFile2,sourceFile,outputFolder,"~iPad@2x"); // generates 152px Glasklart icon (~ipad@2x) | what you
 generateGlasklartIconSmart(templateFile3,sourceFile,outputFolder,"@3x"); // generates 180px Glasklart icon (@3x)           | don't need
 
 // functions ------------------------------------------------------------------------------------------------------
-
 function generateGlasklartIconSmart(templateFile,sourceFile,outputFolder,fileName) {
     var templateDoc = open(templateFile); // open template
     template = app.activeDocument; // reference template
@@ -39,7 +36,6 @@ function generateGlasklartIconSmart(templateFile,sourceFile,outputFolder,fileNam
     saveFile(outputFolder, fileName); // save file to above set output folder
     templateDoc.close(SaveOptions.DONOTSAVECHANGES); // closing template
 }
-
 // function to replace content of a smart object
 function replaceSO(newFile) {
     var id = stringIDToTypeID( "placedLayerReplaceContents" );
@@ -51,7 +47,6 @@ function replaceSO(newFile) {
     executeAction(id, desc, DialogModes.NO);
     return app.activeDocument.activeLayer;
 }
-
 // function for saving finished Glasklart icon to given ouput folder
 function saveFile(outputFolder, fileName) {
     var opts;
