@@ -24,7 +24,7 @@ var templateFile1 = File(templateFolder+'/templates/01_Glasklart_Icon_Template_@
 var templateFile2 = File(templateFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x_Smart.psd');
 var templateFile3 = File(templateFolder+'/templates/03_Glasklart_Icon_Template_@3x_Smart.psd');
 
-generateGlasklartIconSmart(templateFile1,sourceFile,outputFolder,"@2x"); // generates 120px Glasklart icon (@2x)            | comment out
+generateGlasklartIconSmart(templateFile1,sourceFile,outputFolder,"@2x"); // generates 120px Glasklart icon (@2x)           | comment out
 generateGlasklartIconSmart(templateFile2,sourceFile,outputFolder,"~iPad@2x"); // generates 152px Glasklart icon (~ipad@2x) | what you
 generateGlasklartIconSmart(templateFile3,sourceFile,outputFolder,"@3x"); // generates 180px Glasklart icon (@3x)           | don't need
 
