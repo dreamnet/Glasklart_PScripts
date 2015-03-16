@@ -1,8 +1,10 @@
-﻿// Script for automatic generating Glasklart .png icons (@2x, ~ipad@2x and @3x).
-
+﻿// Script for automatic generating Glasklart .png icons (@2x, ~ipad@2x and @3x) using smart objects.
+//
+// This script only works with Photoshop CS6 and Photoshop CC!!
+//
 // The script needs the Glasklart Icon Templates (seed vars below) and a 1024x1024px source .png file.
 //
-// written by @dreamnet 12-30-14 - updated on 02-22-15
+// written by @dreamnet 03-16-15
 
 #target photoshop
 app.bringToFront();
