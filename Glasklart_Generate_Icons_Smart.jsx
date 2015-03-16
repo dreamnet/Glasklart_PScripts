@@ -3,14 +3,13 @@
 // The script needs the Glasklart Icon Templates (seed vars below) and a 1024x1024px source .png file.
 // written by @dreamnet 03-16-15
 
-#target photoshop
-app.bringToFront();
-
 // Please set the vars below to your needs! -----------------------------------------------------------------------
 var templateFolder = 'D:/Users/Kirchi/Desktop/Glasklart PScripts'; // the folder containing the 'template' folder
 var outputFolder = 'D/Users/Kirchi/Desktop'; // The output folder where the finished icons will be saved.
 // end editable vars ----------------------------------------------------------------------------------------------
 
+#target photoshop
+app.bringToFront();
 // Show dialog for the 1024x1024px png source file
 var sourceFile = File.openDialog ("Please select the 1024x1024px Glasklart PNG source file", "*.png", false)
 // set paths to template files
