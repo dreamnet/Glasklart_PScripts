@@ -21,7 +21,7 @@ var width = doc.width.as('px');
 var height = doc.height.as('px');
 if(width != 1024 || height != 1024) { // we have a problem
     var message = 'Source file has wrong dimensions. Please check.'+'\n'+'Width: '+width+'px, Height: '+height+'px';
-    alert(message,'Wrong sourcefile.', 'errorIcon')
+    alert(message,'Wrong sourcefile...', 'errorIcon')
 } else { // all ok, continue
     drawMarkers(); // drawing two 10% opaque rectangles into the source file to get rid of problems with centering it in the template files
     saveFile(outputFolder,sourceFileName);
