@@ -20,7 +20,7 @@
 // written by @dreamnet 12-22-14 - last overworked on 02-22-15
 
 #target photoshop
-app.bringToFront();
+// app.bringToFront();
 
 // the base folder, normally you only need to change this to wherever your source files are (without ending slash!)
 var baseFolder = 'D:/Users/Kirchi/Desktop/Glasklart PScripts'; 
@@ -37,16 +37,22 @@ var fileList = inputFolder.getFiles('*.png'); // getting all .png's in input fol
 
 for(var i=0; i<fileList.length; i++) { // loop trough input files
     
-    // set path to source file end open it
-    var sourceFile = File(fileList[i]);
+    var sourceFile = File(fileList[i]); // set path to source file
+    var doc = open(sourceFile); // open SourceFile
+    var doc = app.activeDocument;
+    var docName = doc.name;
+    docName = docName.replace(/(?:\.[^.]*$|$)/, '');
+    drawMarkers();
+    saveFile(inputFolder,docName);
+    doc.close(SaveOptions.DONOTSAVECHANGES); // closing source file
 
     // get sourceDoc name (and remove file extension)
-    var docName = sourceFile.name;
-    docName = docName.replace(/(?:\.[^.]*$|$)/, '');
+    // var docName = sourceFile.name;
+    // docName = docName.replace(/(?:\.[^.]*$|$)/, '');
 
-    // generateGlasklartIcon(78, 21, sourceFile, templateFile1, outputFolder+"/@2x", docName+"@2x");           // generates 120px Glasklart icon (@2x)      | comment out
-    generateGlasklartIcon(100, 26, sourceFile, templateFile2, outputFolder+"/iPad", docName+"~ipad@2x"); // generates 152px Glasklart icon (~ipad@2x) | what you
-    generateGlasklartIcon(120, 30, sourceFile, templateFile3, outputFolder+"/@3x", docName+"@3x");          // generates 180px Glasklart icon (@3x)      | don't need
+    generateGlasklartIcon(78, 21,  sourceFile, templateFile1, outputFolder+"/@2x", docName+"@2x");           // generates 120px Glasklart icon (@2x)      | comment out
+    generateGlasklartIcon(100, 26, sourceFile, templateFile2, outputFolder+"/@2x~ipad", docName+"@2x~ipad"); // generates 152px Glasklart icon (@2x~ipad) | what you
+    generateGlasklartIcon(120, 30, sourceFile, templateFile3, outputFolder+"/@3x", docName+"@3x");           // generates 180px Glasklart icon (@3x)      | don't need
     
     sourceFile.remove(); // delete source file from disk
 
@@ -56,8 +62,22 @@ for(var i=0; i<fileList.length; i++) { // loop trough input files
 
 // functions ------------------------------------------------------------------------------------------------------
 
-// function for generating a Glasklart icon
-function generateGlasklartIcon(size,offSet,sourceFile,templateFile,outputFolder,fileName) {
+function drawMarkers() { // function draws two 10% opaque rectangles into source to get rid of problems centering it in template
+    var doc = app.activeDocument;
+    var newLayer = doc.artLayers.add();
+    var sqareColor = new RGBColor();
+    sqareColor.red = 0; sqareColor.green = 0; sqareColor.blue = 0;
+    selectedRegion = Array(Array(0,0),Array(0,1),Array(1,1),Array(1,0));
+    doc.selection.select(selectedRegion);
+    doc.selection.fill(sqareColor);
+    selectedRegion = Array(Array(1023,1023),Array(1023,1024),Array(1024,1024),Array(1024,1023));
+    doc.selection.select(selectedRegion);
+    doc.selection.fill(sqareColor);
+    doc.selection.deselect();
+    newLayer.opacity = 10;
+}
+
+function generateGlasklartIcon(size,offSet,sourceFile,templateFile,outputFolder,fileName) { // function for generating a Glasklart icon
     var templateDoc = open(templateFile); // open template
     template = app.activeDocument; // reference template
     if(sourceFile != null) { var sourceDoc = open(sourceFile); } // open source file
@@ -78,8 +98,7 @@ function generateGlasklartIcon(size,offSet,sourceFile,templateFile,outputFolder,
     templateDoc.close(SaveOptions.DONOTSAVECHANGES); // closing template
 }
 
-// function for save finished Glasklart icon (save for web)
-function saveFile(pathPart, fileName) {
+function saveFile(pathPart, fileName) { // function for save finished Glasklart icon (save for web)
     var opts;
     opts = new ExportOptionsSaveForWeb();
     opts.format = SaveDocumentType.PNG;
@@ -89,8 +108,7 @@ function saveFile(pathPart, fileName) {
     app.activeDocument.exportDocument(outputFile, ExportType.SAVEFORWEB, opts);
 }
 
-// function to copy layer effects of one layer and apply them to another one
-function transferEffects (layer1, layer2) {
+function transferEffects (layer1, layer2) { // function to copy layer effects of one layer and apply them to another one
     app.activeDocument.activeLayer = layer1;
     try {
         var id157 = charIDToTypeID( "CpFX" );

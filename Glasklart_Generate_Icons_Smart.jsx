@@ -23,8 +23,7 @@ if(width != 1024 || height != 1024) { // we have a problem
     var message = 'Source file has wrong dimensions. Please check.'+'\n'+'Width: '+width+'px, Height: '+height+'px';
     alert(message,'Wrong sourcefile.', 'errorIcon')
 } else { // all ok, continue
-    // drawing two 10% opaque rectangles into the source file to get rid of problems with centering it in the source files
-    drawMarkers();
+    drawMarkers(); // drawing two 10% opaque rectangles into the source file to get rid of problems with centering it in the template files
     saveFile(outputFolder,sourceFileName);
     doc.close(SaveOptions.DONOTSAVECHANGES); // closing source file
     // set paths to template files
@@ -44,7 +43,7 @@ function drawMarkers() {
     var newLayer = doc.artLayers.add();
     var sqareColor = new RGBColor();
     sqareColor.red = 0; sqareColor.green = 0; sqareColor.blue = 0;
-    selectedRegion = Array(Array(0,0),Array(0, 1),Array(1, 1),Array(1, 0));
+    selectedRegion = Array(Array(0,0),Array(0,1),Array(1,1),Array(1,0));
     doc.selection.select(selectedRegion);
     doc.selection.fill(sqareColor);
     selectedRegion = Array(Array(1023,1023),Array(1023,1024),Array(1024,1024),Array(1024,1023));
