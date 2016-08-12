@@ -5,7 +5,7 @@
 
 // Please set the vars below to your needs! -----------------------------------------------------------------------
 var templateFolder = 'D:/Users/Kirchi/Desktop/Glasklart PScripts'; // the folder containing the 'template' folder
-var outputFolder = 'D/Users/Kirchi/Desktop'; // The output folder where the finished icons will be saved.
+var outputFolder = 'D/Users/Kirchi/Desktop'; // The output folder where the finished icons will be saved. Without :!
 // end editable vars ----------------------------------------------------------------------------------------------
 
 #target photoshop
@@ -21,6 +21,7 @@ var width = doc.width.as('px');
 var height = doc.height.as('px');
 if(width != 1024 || height != 1024) { // we have a problem
     var message = 'Source file has wrong dimensions. Please check.'+'\n'+'Width: '+width+'px, Height: '+height+'px';
+    doc.close(SaveOptions.DONOTSAVECHANGES); // closing source file
     alert(message,'Wrong sourcefile...', 'errorIcon')
 } else { // all ok, continue
     drawMarkers(); // drawing two 10% opaque rectangles into the source file to get rid of problems with centering it in the template files
@@ -31,9 +32,9 @@ if(width != 1024 || height != 1024) { // we have a problem
     var templateFile2 = File(templateFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x_Smart.psd');
     var templateFile3 = File(templateFolder+'/templates/03_Glasklart_Icon_Template_@3x_Smart.psd');
     // generating the icons
-    generateGlasklartIconSmart(templateFile1,sourceFile,outputFolder,"@2x.png"); // generates @2x Glasklart icon       | you can comment
-    generateGlasklartIconSmart(templateFile2,sourceFile,outputFolder,"~iPad@2x.png"); // generates iPad Glasklart icon | out what you
-    generateGlasklartIconSmart(templateFile3,sourceFile,outputFolder,"@3x.png"); // generates @3x Glasklart icon       | don't need
+    generateGlasklartIconSmart(templateFile1,sourceFile,outputFolder,"@2x.png"); // generates @2x Glasklart icon       | you can  comment
+    generateGlasklartIconSmart(templateFile2,sourceFile,outputFolder,"~iPad@2x.png"); // generates iPad Glasklart icon | out with // what
+    generateGlasklartIconSmart(templateFile3,sourceFile,outputFolder,"@3x.png"); // generates @3x Glasklart icon       | you  don't  need
 }
 // end of script --------------------------------------------------------------------------------------------------
 
