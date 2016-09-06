@@ -1,23 +1,19 @@
 ﻿// Photoshop script for converting 1024x1024px Glasklart source files into Glasklart icons.
-// The Script awaits existing input and output folders and the Glasklart icon templates (seed vars below).
+// The Script awaits existing "input" and "output" folders and the Glasklart icon templates (seed vars below).
 //
 // Folder structure:
 //
 // Glasklart PScripts
-//      -> input (only 1024x1024px png files are accepted)
-//      -> output
-//          -> @2x
-//          -> @3x
-//          -> iPad@2x
+//      -> input (put your 1024x1024px png in this dir)
+//      -> output (the finished 180x180px Glasklart icons will be stored in this dir)
 //      -> templates
-//          -> 01_Glasklart_Icon_Template_@2x.psd
-//          -> 02_Galsklart_Icon_Template_~iPad@2x.psd
-//          -> 03_Glasklart_Icon_Template_@3x.psd
+//          -> Glasklart_Icon_Template_v5.02.psd
+//          -> Glasklart_Icon_Template_v5.02_Smart.psd
 //
 // take care that this script deletes the input files after converting them to Glasklart icons without any prompting !!!
-// if you don't want his, simply comment out line #51 (// sourceFile.remove();) <----------------------------------- !!!
+// if you don't want his, simply comment out line #56 (// sourceFile.remove();) <----------------------------------- !!!
 //
-// written by @dreamnet 12-22-14 - last overworked on 02-22-15
+// written by @dreamnet 12-22-14 - last overworked on 09-06-16
 
 #target photoshop
 // app.bringToFront();
@@ -29,9 +25,8 @@ var inputFolder = Folder(baseFolder+'/input'); // the folder witch contains the 
 var outputFolder = Folder(baseFolder+'/output'); // the folder where the finished Glasklart icons are stored
 
 // paths to template files
-var templateFile1 = File(baseFolder+'/templates/01_Glasklart_Icon_Template_@2x.psd');
-var templateFile2 = File(baseFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x.psd');
-var templateFile3 = File(baseFolder+'/templates/03_Glasklart_Icon_Template_@3x.psd');
+var templateFile1 = File(baseFolder+'/templates/Glasklart_Icon_Template_v5.02.psd');
+var templateFile2 = File(baseFolder+'/templates/Glasklart_Icon_Template_v5.02_Smart.psd');
 
 var fileList = inputFolder.getFiles('*.png'); // getting all .png's in input folder
 
@@ -50,11 +45,9 @@ for(var i=0; i<fileList.length; i++) { // loop trough input files
     // var docName = sourceFile.name;
     // docName = docName.replace(/(?:\.[^.]*$|$)/, '');
 
-    generateGlasklartIcon(78, 21,  sourceFile, templateFile1, outputFolder+"/@2x", docName+"@2x");           // generates 120px Glasklart icon (@2x)      | comment out
-    generateGlasklartIcon(100, 26, sourceFile, templateFile2, outputFolder+"/@2x~ipad", docName+"@2x~ipad"); // generates 152px Glasklart icon (@2x~ipad) | what you
-    generateGlasklartIcon(120, 30, sourceFile, templateFile3, outputFolder+"/@3x", docName+"@3x");           // generates 180px Glasklart icon (@3x)      | don't need
+    generateGlasklartIcon(118, 31, sourceFile, templateFile1, outputFolder, docName+"-large"); // generates the 180px Glasklart icon and adds -large to the filename
     
-    sourceFile.remove(); // delete source file from disk
+    sourceFile.remove(); // delete source file
 
 }
 
@@ -92,7 +85,7 @@ function generateGlasklartIcon(size,offSet,sourceFile,templateFile,outputFolder,
     template.selection.translate(offSet,offSet); // moving selection (cant move layer, bacause Photoshop don't sees transparent pixels)
     template.selection.deselect(); // remove selection
     layerGroup = template.layerSets.getByName("Sample Icons");
-    layerCopy = layerGroup.layers.getByName("com.atebits.Tweetie2");
+    layerCopy = layerGroup.layers.getByName("com.anemonetheming.anemone");
     transferEffects(layerCopy, layer); // copy Glasklart style from sample icon to inserted layer
     saveFile(outputFolder, fileName); // save file to above set output folder
     templateDoc.close(SaveOptions.DONOTSAVECHANGES); // closing template

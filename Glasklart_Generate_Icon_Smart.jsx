@@ -1,7 +1,7 @@
-﻿// Script for automatic generating Glasklart .png icons (@2x, ~ipad@2x and @3x) using smart objects.
+﻿// Script for automatic generating 180x180px Glasklart .png icons (-large) using smart objects.
 // This script only works with Photoshop CS6 and Photoshop CC!!
 // The script needs the Glasklart Icon Templates (seed vars below) and a 1024x1024px source .png file.
-// written by @dreamnet 03-16-15
+// written by @dreamnet 03-16-15 - overworked at 09-06-16
 
 // Please set the vars below to your needs! -----------------------------------------------------------------------
 var templateFolder = 'D:/Users/Kirchi/Desktop/Glasklart PScripts'; // the folder containing the 'template' folder
@@ -24,17 +24,15 @@ if(width != 1024 || height != 1024) { // we have a problem
     doc.close(SaveOptions.DONOTSAVECHANGES); // closing source file
     alert(message,'Wrong sourcefile...', 'errorIcon')
 } else { // all ok, continue
-    drawMarkers(); // drawing two 10% opaque rectangles into the source file to get rid of problems with centering it in the template files
+    drawMarkers(); // drawing two 10% opaque rectangles into the source file to get rid of problems with centering it in the template file
     saveFile(outputFolder,sourceFileName);
     doc.close(SaveOptions.DONOTSAVECHANGES); // closing source file
     // set paths to template files
-    var templateFile1 = File(templateFolder+'/templates/01_Glasklart_Icon_Template_@2x_Smart.psd');
-    var templateFile2 = File(templateFolder+'/templates/02_Glasklart_Icon_Template_~iPad@2x_Smart.psd');
-    var templateFile3 = File(templateFolder+'/templates/03_Glasklart_Icon_Template_@3x_Smart.psd');
-    // generating the icons
-    generateGlasklartIconSmart(templateFile1,sourceFile,outputFolder,"@2x.png"); // generates @2x Glasklart icon       | you can  comment
-    generateGlasklartIconSmart(templateFile2,sourceFile,outputFolder,"~iPad@2x.png"); // generates iPad Glasklart icon | out with // what
-    generateGlasklartIconSmart(templateFile3,sourceFile,outputFolder,"@3x.png"); // generates @3x Glasklart icon       | you  don't  need
+    var templateFile = File(templateFolder+'/templates/Glasklart_Icon_Template_v5.02_Smart.psd');
+    
+    // generating the icon
+    generateGlasklartIconSmart(templateFile,sourceFile,outputFolder,"-large.png"); // generates the Glasklart icon
+
 }
 // end of script --------------------------------------------------------------------------------------------------
 
